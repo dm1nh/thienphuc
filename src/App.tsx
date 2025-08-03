@@ -1,9 +1,7 @@
-import { Button } from "@/components/ui/button"
+import { RouterProvider } from "@tanstack/react-router"
+
+import { router } from "./routes/router"
 
 export function App() {
-  return (
-    <div>
-      <Button>Hello from Electron + React</Button>
-    </div>
-  )
+  return <RouterProvider router={router} />
 }
