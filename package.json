@@ -8,9 +8,12 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "rebuild": "electron-rebuild -f -w better-sqlite3",
+    "recompile": "electron-rebuild -f -w \"better-sqlite3\"",
     "publish": "electron-forge publish",
-    "lint": "eslint --ext .ts,.tsx ."
+    "lint": "eslint --ext .ts,.tsx .",
+    "db:push": "drizzle-kit push",
+    "db:migrate": "drizzle-kit generate",
+    "db:studio": "drizzle-kit studio"
   },
   "keywords": [],
   "author": {
@@ -21,7 +24,8 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "electron",
-      "electron-winstaller"
+      "electron-winstaller",
+      "lzma-native"
     ]
   },
   "devDependencies": {
