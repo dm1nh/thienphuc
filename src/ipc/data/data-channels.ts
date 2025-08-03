@@ -1,0 +1,5 @@
+export const DATA_CREATE_QUOTE = "data:create_quote"
+export const DATA_UPDATE_QUOTE = "data:update_quote"
+export const DATA_GET_QUOTES = "data:get_quotes"
+export const DATA_GET_QUOTE_BY_ID = "data:get_quote_by_id"
+export const DATA_DELETE_QUOTE = "data:delete_quote"
