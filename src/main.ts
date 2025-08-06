@@ -16,10 +16,10 @@ if (started) {
 
 const createWindow = () => {
   try {
-    runMigrations()
     if (inDevelopment) {
       seedDatabase()
     }
+    runMigrations()
     console.log("Migration applied successfully")
   } catch (err) {
     console.log("Error applying migrations: ", err)

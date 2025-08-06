@@ -5,6 +5,12 @@ import type {
   UpdateQuoteInput,
 } from "@/lib/schemas/quote.schema"
 
+import type {
+  CreateRecordInput,
+  DeleteRecordInput,
+  UpdateRecordInput,
+} from "./lib/schemas/record.schema"
+
 // Preload types
 interface DataAPIContext {
   createQuote: (input: CreateQuoteInput) => Promise<void>
@@ -12,6 +18,9 @@ interface DataAPIContext {
   getQuotes: () => Promise<void>
   getQuoteById: (input: GetQuoteByIdInput) => Promise<void>
   deleteQuote: (input: DeleteQuoteInput) => Promise<void>
+  createRecord: (input: CreateRecordInput) => Promise<void>
+  updateRecord: (input: UpdateRecordInput) => Promise<void>
+  deleteRecord: (input: DeleteRecordInput) => Promise<void>
 }
 
 interface ElectronWindowContext {

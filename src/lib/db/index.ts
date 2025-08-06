@@ -9,8 +9,8 @@ import * as schema from "./schema"
 const inDevelopment = process.env.NODE_ENV == "development"
 
 const dbPath = inDevelopment
-  ? app.getPath("userData") + "/database.db"
-  : path.resolve(__dirname, "../../../database.db")
+  ? path.resolve(__dirname, "../../database.db")
+  : app.getPath("userData") + "/database.db"
+console.log(dbPath)
 const sqlite = new Database(dbPath)
 export const db = drizzle({ client: sqlite, schema })
-export const seedDb = drizzle({ client: sqlite })

@@ -1,8 +1,8 @@
 import { Link, useLoaderData } from "@tanstack/react-router"
 import { PlusIcon } from "lucide-react"
 
+import { QuoteCard } from "@/components/quote-card"
 import { Breadcrumb } from "@/components/shared/breadcrumb"
-import { QuoteCard } from "@/components/shared/quote-card"
 import { Button } from "@/components/ui/button"
 import { Quote } from "@/lib/db/schema"
 
@@ -18,7 +18,7 @@ export function QuotesPage() {
             to: "/",
             label: "Trang chủ",
           },
-          { to: "quotes", label: "Phiếu báo giá" },
+          { to: "/quotes", label: "Phiếu báo giá" },
         ]}
       />
       <Link to="/quotes/new">

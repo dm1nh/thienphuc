@@ -8,23 +8,23 @@ import type {
 import { quoteValidation } from "@/lib/validations/quote.validation"
 
 export const quoteUseCase = {
-  createQuote: async (input: CreateQuoteInput) => {
+  createQuote: (input: CreateQuoteInput) => {
     quoteValidation.createQuote(input)
-    return await quoteRepository.createQuote(input)
+    return quoteRepository.createQuote(input)
   },
-  updateQuote: async (input: UpdateQuoteInput) => {
+  updateQuote: (input: UpdateQuoteInput) => {
     quoteValidation.updateQuote(input)
-    return await quoteRepository.updateQuote(input)
+    return quoteRepository.updateQuote(input)
   },
-  getQuotes: async () => {
-    return await quoteRepository.getQuotes()
+  getQuotes: () => {
+    return quoteRepository.getQuotes()
   },
-  getQuoteById: async (input: GetQuoteByIdInput) => {
+  getQuoteById: (input: GetQuoteByIdInput) => {
     quoteValidation.getQuoteById(input)
-    return await quoteRepository.getQuoteById(input)
+    return quoteRepository.getQuoteById(input)
   },
-  deleteQuote: async (input: DeleteQuoteInput) => {
+  deleteQuote: (input: DeleteQuoteInput) => {
     quoteValidation.deleteQuote(input)
-    return await quoteRepository.deleteQuote(input)
+    return quoteRepository.deleteQuote(input)
   },
 }

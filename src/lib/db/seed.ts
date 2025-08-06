@@ -1,20 +1,180 @@
-import { seed } from "drizzle-seed"
-
-import { db, seedDb } from "."
-import * as schema from "./schema"
+import { db } from "."
+import { quotes, records } from "./schema"
 
 export async function seedDatabase() {
-  const result = await db.select().from(schema.quotes)
-  if (result.length > 0) {
+  if (process.env.NODE_ENV === "production") {
     return
   }
-  await seed(seedDb, schema).refine(() => ({
-    quotes: {
-      columns: {},
-      count: 5,
-      with: {
-        records: 10,
-      },
+  await db.delete(quotes)
+  await db.delete(records)
+
+  await db.insert(quotes).values({
+    id: "01.S20250423035",
+    customer: "Nguyễn Hữu Minh",
+    phoneNumber: "0365530552",
+    address: "17/3 Trần Quang Cơ, Phú Thạnh, HCM",
+    taxCode: "xxxxxxxxxxx",
+    carModel: "Ranger 4x4 XLT MT",
+    carOdometer: 410_130,
+    carRegistrationNumber: "51C97207",
+    carVin: "MNCLMFF80JW800254",
+    date: new Date().toISOString(),
+    createdAt: new Date().toISOString(),
+  })
+
+  await db.insert(records).values([
+    {
+      quoteId: "01.S20250423035",
+      name: "Két nước Ranger 2012-2015",
+      unitPrice: 8_434_000,
+      unit: "Cái",
+      quantity: 1,
+      vat: 8,
+      type: "1",
     },
-  }))
+    {
+      quoteId: "01.S20250423035",
+      name: "Ống nước vào bình nước phụ",
+      unitPrice: 1_452_000,
+      unit: "Cái",
+      quantity: 1,
+      vat: 8,
+      type: "1",
+    },
+    {
+      quoteId: "01.S20250423035",
+      name: "Ống nước Py bát",
+      unitPrice: 393_000,
+      unit: "Cái",
+      quantity: 1,
+      vat: 8,
+      type: "1",
+    },
+    {
+      quoteId: "01.S20250423035",
+      name: "Ống gió làm mát động cơ",
+      unitPrice: 2_602_000,
+      unit: "Cái",
+      quantity: 1,
+      vat: 8,
+      type: "1",
+    },
+    {
+      quoteId: "01.S20250423035",
+      name: "Keo dán joint động cơ",
+      unitPrice: 450_000,
+      unit: "Chai",
+      quantity: 1,
+      vat: 10,
+      type: "1",
+    },
+    {
+      quoteId: "01.S20250423035",
+      name: "Nước làm mát động cơ màu vàng",
+      unitPrice: 126_000,
+      unit: "Lít",
+      quantity: 8,
+      vat: 10,
+      type: "1",
+    },
+    {
+      quoteId: "01.S20250423035",
+      name: "Ly hợp quạt",
+      unitPrice: 5_581_000,
+      unit: "Cái",
+      quantity: 1,
+      vat: 8,
+      type: "1",
+    },
+    {
+      quoteId: "01.S20250423035",
+      name: "Chữ A trên Everest 2015",
+      unitPrice: 2_192_000,
+      unit: "Cái",
+      quantity: 1,
+      vat: 8,
+      type: "1",
+    },
+    {
+      quoteId: "01.S20250423035",
+      name: "Chữ A trên Everest 2015-2018 LH MCA",
+      unitPrice: 2_192_000,
+      unit: "Cái",
+      quantity: 1,
+      vat: 8,
+      type: "1",
+    },
+    {
+      quoteId: "01.S20250423035",
+      name: "Rotuyn trụ",
+      unitPrice: 663_000,
+      unit: "Cái",
+      quantity: 1,
+      vat: 8,
+      type: "1",
+    },
+    {
+      quoteId: "01.S20250423035",
+      name: "Tán chữ A dưới Ranger 2018 M16",
+      unitPrice: 54_000,
+      unit: "Cái",
+      quantity: 1,
+      vat: 10,
+      type: "1",
+    },
+    {
+      quoteId: "01.S20250423035",
+      name: "Rotuyn thanh giằn (ngắn)",
+      unitPrice: 1_967_000,
+      unit: "Cái",
+      quantity: 1,
+      vat: 8,
+      type: "1",
+    },
+    {
+      quoteId: "01.S20250423035",
+      name: "Bạc đạn tăng đơ curoa máy P375",
+      unitPrice: 2_860_000,
+      unit: "Cái",
+      quantity: 1,
+      vat: 8,
+      type: "1",
+    },
+    {
+      quoteId: "01.S20250423035",
+      name: "Rotuyn lái trong",
+      unitPrice: 7_405_000,
+      unit: "Cái",
+      quantity: 1,
+      vat: 8,
+      type: "1",
+    },
+    {
+      quoteId: "01.S20250423035",
+      name: "Gia công ép rotuyn",
+      unitPrice: 180_000,
+      unit: "Cái",
+      quantity: 1,
+      vat: 8,
+      type: "2",
+    },
+    {
+      quoteId: "01.S20250423035",
+      name: "Cân chỉnh lái điện tử",
+      unitPrice: 990_000,
+      unit: "Xe",
+      quantity: 1,
+      vat: 8,
+      type: "2",
+    },
+    {
+      quoteId: "01.S20250423035",
+      name: "Tiền công",
+      unitPrice: 3_600_000,
+      unit: "Xe",
+      quantity: 1,
+      vat: 8,
+      type: "3",
+    },
+  ])
 }
