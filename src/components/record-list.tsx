@@ -91,7 +91,7 @@ export function RecordList({
                         <TableCell className="font-medium">
                           {record.name}
                         </TableCell>
-                        <TableCell>
+                        <TableCell className="text-right">
                           <NumericFormat
                             type="text"
                             className="max-w-[120px] text-right"

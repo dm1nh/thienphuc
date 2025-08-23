@@ -5,10 +5,10 @@ import { Toaster } from "sonner"
 import { BaseLayout } from "@/layouts/base-layout"
 
 export const rootRoute = createRootRoute({
-  component: Root,
+  component: RootLayout,
 })
 
-function Root() {
+function RootLayout() {
   return (
     <>
       <BaseLayout>

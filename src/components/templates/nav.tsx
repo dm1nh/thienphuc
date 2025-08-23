@@ -8,10 +8,10 @@ export function Nav() {
   return (
     <nav className="flex items-center gap-6">
       <NavLink to="/" active={pathname === "/"}>
-        Trang chủ
+        Màn hình chính
       </NavLink>
       <NavLink to="/quotes" active={pathname.startsWith("/quotes")}>
-        Phiếu báo giá
+        Phiếu sửa chữa
       </NavLink>
     </nav>
   )

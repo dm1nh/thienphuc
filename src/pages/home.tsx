@@ -11,7 +11,7 @@ import {
 const cards = [
   {
     to: "/quotes",
-    label: "Phiếu báo giá",
+    label: "Phiếu sửa chữa",
     description: "Xem tất cả các phiếu báo giá",
   },
 ]

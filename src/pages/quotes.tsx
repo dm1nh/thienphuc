@@ -16,9 +16,9 @@ export function QuotesPage() {
         breadcrumb={[
           {
             to: "/",
-            label: "Trang chủ",
+            label: "Màn hình chính",
           },
-          { to: "/quotes", label: "Phiếu báo giá" },
+          { to: "/quotes", label: "Phiếu sửa chữa" },
         ]}
       />
       <Link to="/quotes/new">

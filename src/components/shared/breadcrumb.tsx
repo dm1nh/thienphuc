@@ -17,7 +17,7 @@ export interface BreadcrumbEntry {
 }
 
 export function Breadcrumb({
-  breadcrumb = [{ label: "Trang chủ", to: "/" }],
+  breadcrumb = [{ label: "Màn hình chính", to: "/" }],
 }: {
   breadcrumb?: BreadcrumbEntry[]
 }) {

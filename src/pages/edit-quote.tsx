@@ -18,9 +18,9 @@ export function EditQuotePage() {
         breadcrumb={[
           {
             to: "/",
-            label: "Trang chủ",
+            label: "Màn hình chính",
           },
-          { to: "/quotes", label: "Phiếu báo giá" },
+          { to: "/quotes", label: "Phiếu sửa chữa" },
           { to: `/quotes/${data.id}`, label: `#${data.id}` },
           { to: `/quotes/${data.id}/edit`, label: `Cập nhật` },
         ]}
