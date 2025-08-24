@@ -107,7 +107,9 @@ export function RecordForm({
         )}
       </DialogTrigger>
       <DialogContent>
-        <DialogTitle>{record ? `Cập nhật hạng mục` : "Thêm hạng mục"}</DialogTitle>
+        <DialogTitle>
+          {record ? `Cập nhật hạng mục` : "Thêm hạng mục"}
+        </DialogTitle>
         <DialogDescription>
           {record
             ? `Cập nhật hạng mục #${record.id} trong phiếu #${quote.id}`

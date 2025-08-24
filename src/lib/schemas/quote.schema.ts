@@ -2,10 +2,11 @@ import { z } from "zod"
 
 import { QUOTE_TYPES } from "../constants"
 
+export const quoteTypeEnumSchema = z.enum(QUOTE_TYPES)
 // create
 export const createQuoteFormInputSchema = z.object({
   id: z.string().min(1, { message: "Số phiếu là nội dung bắt buộc" }),
-  type: z.enum(QUOTE_TYPES).default("1"),
+  type: quoteTypeEnumSchema.default("1").optional(),
   customer: z
     .string()
     .min(1, { message: "Tên khách hàng là nội dung bắt buộc" }),
@@ -16,7 +17,7 @@ export const createQuoteFormInputSchema = z.object({
   taxCode: z.string(),
   carModel: z.string(),
   carRegistrationNumber: z.string(),
-  carOdometer: z.coerce.number(),
+  carOdometer: z.coerce.number<number>(),
   carVin: z.string(),
   date: z.iso.datetime({ message: "Ngày xuất phiếu chưa đúng định dạng" }),
 })
@@ -26,6 +27,8 @@ export type CreateQuoteFormInput = z.infer<typeof createQuoteFormInputSchema>
 export const createQuoteInputSchema = createQuoteFormInputSchema
 
 export type CreateQuoteInput = z.infer<typeof createQuoteInputSchema>
+
+export type QuoteTypeEnum = z.infer<typeof quoteTypeEnumSchema>
 
 // update
 export const updateQuoteFormInputSchema = z.object({

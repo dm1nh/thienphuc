@@ -10,6 +10,10 @@ export default defineConfig({
     },
   },
   build: {
+    commonjsOptions: {
+      dynamicRequireTargets: ["better-sqlite3"],
+      ignoreDynamicRequires: true,
+    },
     rollupOptions: {
       external: ["better-sqlite3"],
     },
