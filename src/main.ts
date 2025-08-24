@@ -14,10 +14,10 @@ if (started) {
   app.quit()
 }
 
-const createWindow = () => {
+const createWindow = async () => {
   try {
     if (inDevelopment) {
-      seedDatabase()
+      await seedDatabase()
     }
     runMigrations()
     console.log("Migration applied successfully")

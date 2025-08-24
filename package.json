@@ -1,8 +1,8 @@
 {
   "name": "thienphuc",
-  "productName": "thienphuc",
-  "version": "1.0.0",
-  "description": "My Electron application description",
+  "productName": "ThienPhucWorkshop",
+  "version": "0.0.1",
+  "description": "ThienPhucWorkshop management application",
   "main": ".vite/build/main.js",
   "scripts": {
     "start": "electron-forge start",
@@ -12,7 +12,8 @@
     "publish": "electron-forge publish",
     "lint": "eslint --ext .ts,.tsx .",
     "db:push": "drizzle-kit push",
-    "db:migrate": "drizzle-kit generate",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio"
   },
   "keywords": [],
@@ -23,8 +24,11 @@
   "license": "MIT",
   "pnpm": {
     "onlyBuiltDependencies": [
+      "@tailwindcss/oxide",
+      "better-sqlite3",
       "electron",
       "electron-winstaller",
+      "esbuild",
       "lzma-native"
     ]
   },
