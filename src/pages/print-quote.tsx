@@ -1,11 +1,12 @@
 import { useRef } from "react"
 
-import { notFound, useLoaderData } from "@tanstack/react-router"
+import { Link, notFound, useLoaderData } from "@tanstack/react-router"
 import { format } from "date-fns"
 import { useReactToPrint } from "react-to-print"
 
 import { RecordList } from "@/components/record-list"
 import { Button } from "@/components/ui/button"
+import { MAPPED_QUOTE_TYPES } from "@/lib/constants"
 import type { QuoteWithRecords } from "@/lib/db/schema"
 
 export function PrintQuotePage() {
@@ -21,7 +22,12 @@ export function PrintQuotePage() {
 
   return (
     <>
-      <Button onClick={print}>In phiếu</Button>
+      <div className="flex items-center gap-4">
+        <Button onClick={print}>In phiếu</Button>
+        <Link to="/quotes/$quoteId" params={{ quoteId: data.id }}>
+          <Button variant="destructive">Quay lại</Button>
+        </Link>
+      </div>
       <div
         ref={contentRef}
         className="flex w-[960px] flex-col items-stretch p-6"
@@ -43,7 +49,7 @@ export function PrintQuotePage() {
           </div>
         </div>
         <h1 className="mt-8 text-center text-2xl font-semibold uppercase">
-          Phiếu báo giá sửa chữa
+          {MAPPED_QUOTE_TYPES[data.type]}
         </h1>
         <div className="mt-2 flex justify-center">
           <table>

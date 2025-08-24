@@ -1,3 +1,10 @@
+export const QUOTE_TYPES = ["1", "2"] as const
+
+export const MAPPED_QUOTE_TYPES = {
+  "1": "Phiếu báo giá sửa chữa",
+  "2": "Phiếu quyết toán sửa chữa",
+} as const
+
 export const RECORD_TYPES = ["1", "2", "3"] as const
 
 export const MAPPED_RECORD_TYPES = {

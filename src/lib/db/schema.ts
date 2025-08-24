@@ -6,10 +6,11 @@ import {
 } from "drizzle-orm"
 import { integer, real, sqliteTable, text } from "drizzle-orm/sqlite-core"
 
-import { RECORD_TYPES } from "../constants"
+import { QUOTE_TYPES, RECORD_TYPES } from "../constants"
 
 export const quotes = sqliteTable("quotes", {
   id: text("id").primaryKey().notNull(),
+  type: text("type", { enum: QUOTE_TYPES }).default("1").notNull(),
   customer: text("customer").notNull(),
   phoneNumber: text("phone_number").notNull(),
   address: text("address"),

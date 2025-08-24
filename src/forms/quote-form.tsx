@@ -24,6 +24,14 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { MAPPED_QUOTE_TYPES } from "@/lib/constants"
 import type { Quote } from "@/lib/db/schema"
 import { createQuote, updateQuote } from "@/lib/helpers/data.helpers"
 import {
@@ -40,6 +48,7 @@ export function QuoteForm({ quote }: { quote?: Quote }) {
     resolver: zodResolver(createQuoteFormInputSchema),
     values: {
       id: quote?.id ?? "",
+      type: quote?.type ?? "1",
       customer: quote?.customer ?? "",
       phoneNumber: quote?.phoneNumber ?? "",
       address: quote?.address ?? "",
@@ -100,6 +109,36 @@ export function QuoteForm({ quote }: { quote?: Quote }) {
             </FormItem>
           )}
         />
+
+        <FormField
+          control={form.control}
+          name="type"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Loại phiếu</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Chọn loại phiếu" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {Object.keys(MAPPED_QUOTE_TYPES).map((type) => (
+                    <SelectItem key={type} value={type}>
+                      {
+                        MAPPED_QUOTE_TYPES[
+                          type as keyof typeof MAPPED_QUOTE_TYPES
+                        ]
+                      }
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <FormField
           control={form.control}
           name="customer"

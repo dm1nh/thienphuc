@@ -2,14 +2,14 @@ import { db } from "."
 import { quotes, records } from "./schema"
 
 export async function seedDatabase() {
-  if (process.env.NODE_ENV === "production") {
-    return
-  }
+  console.info("DELETING OLD SEED DATABASE")
   await db.delete(quotes)
   await db.delete(records)
 
+  console.info("CREATING NEW SEED RECORDS")
   await db.insert(quotes).values({
     id: "01.S20250423035",
+    type: "1",
     customer: "Nguyễn Hữu Minh",
     phoneNumber: "0365530552",
     address: "17/3 Trần Quang Cơ, Phú Thạnh, HCM",
@@ -177,4 +177,6 @@ export async function seedDatabase() {
       type: "3",
     },
   ])
+
+  console.info("SEED DATABASE COMPLETED")
 }

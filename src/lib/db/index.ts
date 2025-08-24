@@ -11,6 +11,7 @@ const inDevelopment = process.env.NODE_ENV == "development"
 const dbPath = inDevelopment
   ? path.resolve(__dirname, "../../database.db")
   : app.getPath("userData") + "/database.db"
-console.log(dbPath)
+// console.log(dbPath)
+
 const sqlite = new Database(dbPath)
 export const db = drizzle({ client: sqlite, schema })

@@ -1,8 +1,11 @@
 import { z } from "zod"
 
+import { QUOTE_TYPES } from "../constants"
+
 // create
 export const createQuoteFormInputSchema = z.object({
   id: z.string().min(1, { message: "Số phiếu là nội dung bắt buộc" }),
+  type: z.enum(QUOTE_TYPES).default("1"),
   customer: z
     .string()
     .min(1, { message: "Tên khách hàng là nội dung bắt buộc" }),

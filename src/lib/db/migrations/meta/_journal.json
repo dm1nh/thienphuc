@@ -15,6 +15,13 @@
       "when": 1754310356059,
       "tag": "0001_fancy_meltdown",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1755945108308,
+      "tag": "0002_busy_dazzler",
+      "breakpoints": true
     }
   ]
 }

@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
+import { MAPPED_QUOTE_TYPES } from "@/lib/constants"
 import type { QuoteWithRecords } from "@/lib/db/schema"
 import { deleteQuote } from "@/lib/helpers/data.helpers"
 
@@ -86,7 +87,10 @@ export function QuotePage() {
       </div>
       <div className="grid grid-cols-2 gap-x-4 gap-y-2">
         <p>Số: {data.id}</p>
-        <p>Khách hàng: {data.customer}</p>
+        <p>Loại phiếu: {MAPPED_QUOTE_TYPES[data.type]}</p>
+        <p>
+          Khách hàng: <b>{data.customer}</b>
+        </p>
         <p>Điện thoại: {data.phoneNumber}</p>
         <p>Địa chỉ: {data.address ?? "N/A"}</p>
         <p>Mã số thuế: {data.taxCode ?? "N/A"}</p>
