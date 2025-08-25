@@ -32,55 +32,57 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { MAPPED_QUOTE_TYPES } from "@/lib/constants"
-import type { Quote } from "@/lib/db/schema"
+import { QuoteWithRecords } from "@/lib/db/schema"
 import { createQuote, updateQuote } from "@/lib/helpers/data.helpers"
 import {
+  CreateQuoteFormInput,
   createQuoteFormInputSchema,
-  type CreateQuoteFormInput,
 } from "@/lib/schemas/quote.schema"
 import { cn } from "@/lib/utils"
 
-export function QuoteForm({ quote }: { quote?: Quote }) {
+export function QuoteForm({ quote }: { quote?: QuoteWithRecords }) {
+  const isEditing = !!quote
   const router = useRouter()
   const [loading, setLoading] = useState(false)
 
+  const initialValues: CreateQuoteFormInput = {
+    id: quote?.id ?? "",
+    type: quote?.type ?? "1",
+    customer: quote?.customer ?? "",
+    phoneNumber: quote?.phoneNumber ?? "",
+    taxCode: quote?.taxCode ?? "",
+    address: quote?.address ?? "",
+    carModel: quote?.carModel ?? "",
+    carRegistrationNumber: quote?.carRegistrationNumber ?? "",
+    carOdometer: quote?.carOdometer ?? 0,
+    carVin: quote?.carVin ?? "",
+    date: quote?.date ?? new Date().toISOString(),
+  }
   const form = useForm<CreateQuoteFormInput>({
     resolver: zodResolver(createQuoteFormInputSchema),
-    values: {
-      id: quote?.id ?? "",
-      type: quote?.type ?? "1",
-      customer: quote?.customer ?? "",
-      phoneNumber: quote?.phoneNumber ?? "",
-      address: quote?.address ?? "",
-      taxCode: quote?.taxCode ?? "",
-      carModel: quote?.carModel ?? "",
-      carRegistrationNumber: quote?.carModel ?? "",
-      carOdometer: quote?.carOdometer ?? 0,
-      carVin: quote?.carVin ?? "",
-      date: new Date().toISOString(),
-    },
+    values: initialValues,
   })
 
   async function onSubmit(values: CreateQuoteFormInput) {
     try {
       setLoading(true)
 
-      if (!quote) {
-        await createQuote(values)
+      if (isEditing) {
+        await updateQuote({
+          id: quote.id,
+          data: values,
+        })
         setLoading(false)
-        toast.success("Thêm phiếu báo giá thành công")
         router.invalidate({ sync: true })
-        router.navigate({ to: "/quotes" })
+        toast.success("Cập nhật phiếu báo giá thành công")
         return
       }
 
-      await updateQuote({
-        id: quote.id,
-        data: values,
-      })
+      await createQuote(values)
       setLoading(false)
+      toast.success("Thêm phiếu báo giá thành công")
       router.invalidate({ sync: true })
-      toast.success("Cập nhật phiếu báo giá thành công")
+      router.navigate({ to: "/quotes" })
     } catch (err) {
       setLoading(false)
       if (err instanceof Error) {
@@ -94,32 +96,18 @@ export function QuoteForm({ quote }: { quote?: Quote }) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="grid grid-cols-2 gap-4"
+        className="grid grid-cols-2 gap-6"
       >
-        <FormField
-          control={form.control}
-          name="id"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Số*</FormLabel>
-              <FormControl>
-                <Input {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
         <FormField
           control={form.control}
           name="type"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="col-span-2">
               <FormLabel>Loại phiếu</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Chọn loại phiếu" />
+                    <SelectValue placeholder="Chọn loại phiếu báo giá" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -141,10 +129,10 @@ export function QuoteForm({ quote }: { quote?: Quote }) {
 
         <FormField
           control={form.control}
-          name="customer"
+          name="id"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Khách hàng*</FormLabel>
+              <FormLabel>Số*</FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
@@ -152,12 +140,27 @@ export function QuoteForm({ quote }: { quote?: Quote }) {
             </FormItem>
           )}
         />
+
+        <FormField
+          control={form.control}
+          name="customer"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Tên khách hàng*</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <FormField
           control={form.control}
           name="phoneNumber"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Điện thoại*</FormLabel>
+              <FormLabel>Số điện thoại*</FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
@@ -165,6 +168,7 @@ export function QuoteForm({ quote }: { quote?: Quote }) {
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="address"
@@ -178,6 +182,7 @@ export function QuoteForm({ quote }: { quote?: Quote }) {
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="taxCode"
@@ -191,12 +196,13 @@ export function QuoteForm({ quote }: { quote?: Quote }) {
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="carModel"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Mẫu xe</FormLabel>
+              <FormLabel>Mẫu xe*</FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
@@ -204,12 +210,13 @@ export function QuoteForm({ quote }: { quote?: Quote }) {
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="carRegistrationNumber"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Biển số xe</FormLabel>
+              <FormLabel>Biển số*</FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
@@ -217,12 +224,13 @@ export function QuoteForm({ quote }: { quote?: Quote }) {
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="carOdometer"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Số km</FormLabel>
+              <FormLabel>Số KM</FormLabel>
               <FormControl>
                 <NumberInput min={0} {...field} />
               </FormControl>
@@ -230,6 +238,7 @@ export function QuoteForm({ quote }: { quote?: Quote }) {
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="carVin"
@@ -243,26 +252,27 @@ export function QuoteForm({ quote }: { quote?: Quote }) {
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="date"
           render={({ field }) => (
             <FormItem className="flex flex-col">
-              <FormLabel>Ngày</FormLabel>
+              <FormLabel>Ngày xuất phiếu</FormLabel>
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
                     <Button
                       variant={"outline"}
                       className={cn(
-                        "pl-3 text-left font-normal",
+                        "w-full pl-3 text-left font-normal",
                         !field.value && "text-muted-foreground",
                       )}
                     >
                       {field.value ? (
                         format(field.value, "dd-MM-yyy")
                       ) : (
-                        <span>Chọn một ngày</span>
+                        <span>Chọn ngày xuất phiếu</span>
                       )}
                       <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                     </Button>
@@ -273,7 +283,9 @@ export function QuoteForm({ quote }: { quote?: Quote }) {
                     mode="single"
                     selected={new Date(field.value)}
                     onSelect={(value) => field.onChange(value?.toISOString())}
-                    disabled={(date) => date < new Date("2024-01-01")}
+                    disabled={(date) =>
+                      date > new Date() || date < new Date("1900-01-01")
+                    }
                     captionLayout="dropdown"
                   />
                 </PopoverContent>
@@ -282,10 +294,11 @@ export function QuoteForm({ quote }: { quote?: Quote }) {
             </FormItem>
           )}
         />
+
         <Button
           type="submit"
-          className="justify-self-start"
           disabled={loading || !form.formState.isDirty}
+          className="justify-self-start"
         >
           {loading ? (
             <>

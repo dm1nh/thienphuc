@@ -20,7 +20,7 @@ export const QuotesRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/quotes",
   component: QuotesPage,
-  loader: async () => {
+  loader: () => {
     return getQuotes()
   },
 })
@@ -34,7 +34,7 @@ export const NewQuoteRoute = createRoute({
 export const QuoteRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/quotes/$quoteId",
-  loader: async ({ params }) => {
+  loader: ({ params }) => {
     return getQuoteById(params.quoteId)
   },
   component: QuotePage,
@@ -43,7 +43,7 @@ export const QuoteRoute = createRoute({
 export const EditQuoteRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/quotes/$quoteId/edit",
-  loader: async ({ params }) => {
+  loader: ({ params }) => {
     return getQuoteById(params.quoteId)
   },
   component: EditQuotePage,
@@ -52,7 +52,7 @@ export const EditQuoteRoute = createRoute({
 export const PrintQuoteRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/quotes/$quoteId/print",
-  loader: async ({ params }) => {
+  loader: ({ params }) => {
     return getQuoteById(params.quoteId)
   },
   component: PrintQuotePage,

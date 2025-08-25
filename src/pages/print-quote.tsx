@@ -13,6 +13,8 @@ export function PrintQuotePage() {
   const data = useLoaderData({
     from: "/quotes/$quoteId/print",
   }) as QuoteWithRecords
+  console.log(data)
+
   const contentRef = useRef<HTMLDivElement>(null)
   const print = useReactToPrint({ contentRef })
 

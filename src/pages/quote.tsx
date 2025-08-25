@@ -29,6 +29,7 @@ export function QuotePage() {
   const router = useRouter()
 
   const data = useLoaderData({ from: "/quotes/$quoteId" }) as QuoteWithRecords
+  console.log(data)
 
   async function onDeleteQuote() {
     await deleteQuote(data.id)

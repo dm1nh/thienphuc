@@ -11,6 +11,7 @@ export function EditQuotePage() {
   const data = useLoaderData({
     from: "/quotes/$quoteId/edit",
   }) as QuoteWithRecords
+  console.log(data)
 
   return (
     <>
