@@ -45,6 +45,19 @@ export function CreateQuoteForm() {
 
   const form = useForm<CreateQuoteFormInput>({
     resolver: zodResolver(createQuoteFormInputSchema),
+    defaultValues: {
+      id: "",
+      type: "1",
+      customer: "",
+      phoneNumber: "",
+      taxCode: "",
+      address: "",
+      carModel: "",
+      carRegistrationNumber: "",
+      carOdometer: 0,
+      carVin: "",
+      date: new Date().toISOString(),
+    },
   })
 
   async function onSubmit(values: CreateQuoteFormInput) {
