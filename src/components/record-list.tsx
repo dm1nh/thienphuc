@@ -69,29 +69,39 @@ export function RecordList({
                     decimalScale={0}
                   />
                 </div>
-                <Table>
+                <Table className="border">
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="">STT</TableHead>
-                      <TableHead>Hạng mục</TableHead>
-                      <TableHead className="text-right">Đơn giá</TableHead>
-                      <TableHead className="text-right">Số lượng</TableHead>
+                      <TableHead className="border">STT</TableHead>
+                      <TableHead className="border">Hạng mục</TableHead>
+                      <TableHead className="border text-right">
+                        Đơn giá
+                      </TableHead>
+                      <TableHead className="border text-right">
+                        Số lượng
+                      </TableHead>
                       <TableHead>Đơn vị</TableHead>
-                      <TableHead className="text-right">VAT(%)</TableHead>
-                      <TableHead className="text-right">Thành tiền</TableHead>
+                      <TableHead className="border text-right">
+                        VAT(%)
+                      </TableHead>
+                      <TableHead className="border text-right">
+                        Thành tiền
+                      </TableHead>
                       {allowEdit && (
-                        <TableHead className="text-right">Hành động</TableHead>
+                        <TableHead className="border text-right">
+                          Hành động
+                        </TableHead>
                       )}
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {records.map((record, _index) => (
                       <TableRow key={record.id}>
-                        <TableCell>{_index + 1}</TableCell>
-                        <TableCell className="font-medium">
+                        <TableCell className="border">{_index + 1}</TableCell>
+                        <TableCell className="border font-medium">
                           {record.name}
                         </TableCell>
-                        <TableCell className="text-right">
+                        <TableCell className="border text-right">
                           <NumericFormat
                             type="text"
                             className="max-w-[120px] text-right"
@@ -101,14 +111,14 @@ export function RecordList({
                             decimalScale={0}
                           />
                         </TableCell>
-                        <TableCell className="text-right">
+                        <TableCell className="border text-right">
                           {record.quantity}
                         </TableCell>
-                        <TableCell>{record.unit}</TableCell>
-                        <TableCell className="text-right">
+                        <TableCell className="border">{record.unit}</TableCell>
+                        <TableCell className="border text-right">
                           {record.vat}
                         </TableCell>
-                        <TableCell className="text-right">
+                        <TableCell className="border text-right">
                           <NumericFormat
                             type="text"
                             className="max-w-[120px] text-right font-medium"
@@ -119,7 +129,7 @@ export function RecordList({
                           />
                         </TableCell>
                         {allowEdit && (
-                          <TableCell className="space-x-2 text-right">
+                          <TableCell className="space-x-2 border text-right">
                             <EditRecordForm
                               quote={quote}
                               recordId={record.id}
