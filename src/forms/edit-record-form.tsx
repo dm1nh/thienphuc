@@ -2,7 +2,7 @@ import { useState } from "react"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "@tanstack/react-router"
-import { PenIcon, PlusIcon } from "lucide-react"
+import { PenIcon } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
@@ -33,13 +33,13 @@ import {
 } from "@/components/ui/select"
 import { MAPPED_RECORD_TYPES, VAT_VALUES } from "@/lib/constants"
 import type { QuoteWithRecords } from "@/lib/db/schema"
-import { createRecord, updateRecord } from "@/lib/helpers/data.helpers"
+import { updateRecord } from "@/lib/helpers/data.helpers"
 import {
   createRecordFormInputSchema,
   type CreateRecordFormInput,
 } from "@/lib/schemas/record.schema"
 
-export function RecordForm({
+export function EditRecordForm({
   quote,
   recordId,
 }: {
@@ -70,16 +70,14 @@ export function RecordForm({
   async function onSubmit(values: CreateRecordFormInput) {
     try {
       setLoading(true)
+
       if (!record) {
-        await createRecord({
-          ...values,
-          quoteId: quote.id,
-        })
-        toast.success("Tạo mới hạng mục thành công")
-      } else {
-        await updateRecord({ id: record.id, data: values })
-        toast.success("Cập nhật hạng mục thành công")
+        toast.error("Không tìm thấy hạng mục cần cập nhật")
+        return
       }
+
+      await updateRecord({ id: record.id, data: values })
+      toast.success("Cập nhật hạng mục thành công")
       router.invalidate({ sync: true })
       form.reset()
       setOpen(false)
@@ -93,27 +91,21 @@ export function RecordForm({
     }
   }
 
+  if (!record) {
+    return null
+  }
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        {recordId ? (
-          <Button variant="outline" size="icon">
-            <PenIcon />
-          </Button>
-        ) : (
-          <Button variant="secondary">
-            <PlusIcon /> Thêm hạng mục
-          </Button>
-        )}
+        <Button variant="outline" size="icon">
+          <PenIcon />
+        </Button>
       </DialogTrigger>
       <DialogContent>
-        <DialogTitle>
-          {record ? `Cập nhật hạng mục` : "Thêm hạng mục"}
-        </DialogTitle>
+        <DialogTitle>Cập nhật hạng mục</DialogTitle>
         <DialogDescription>
-          {record
-            ? `Cập nhật hạng mục #${record.id} trong phiếu #${quote.id}`
-            : `Thêm hạng mục mới vào phiếu #${quote.id}`}
+          {`Cập nhật hạng mục #${record.id} trong phiếu #${quote.id}`}
         </DialogDescription>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -130,6 +122,7 @@ export function RecordForm({
                 </FormItem>
               )}
             />
+
             <FormField
               control={form.control}
               name="unitPrice"
@@ -157,6 +150,7 @@ export function RecordForm({
                 </FormItem>
               )}
             />
+
             <FormField
               control={form.control}
               name="quantity"
@@ -175,6 +169,7 @@ export function RecordForm({
                 </FormItem>
               )}
             />
+
             <FormField
               control={form.control}
               name="vat"
@@ -235,7 +230,7 @@ export function RecordForm({
               )}
             />
             <Button type="submit" disabled={loading || !form.formState.isDirty}>
-              {record ? "Cập nhật" : "Thêm"}
+              Cập nhật
             </Button>
           </form>
         </Form>

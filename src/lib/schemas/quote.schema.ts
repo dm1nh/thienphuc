@@ -31,14 +31,14 @@ export type CreateQuoteInput = z.infer<typeof createQuoteInputSchema>
 export type QuoteTypeEnum = z.infer<typeof quoteTypeEnumSchema>
 
 // update
-export const updateQuoteFormInputSchema = z.object({
-  id: z.string(),
-  data: createQuoteFormInputSchema.partial(),
-})
+export const updateQuoteFormInputSchema = createQuoteFormInputSchema.partial()
 
 export type UpdateQuoteFormInput = z.infer<typeof updateQuoteFormInputSchema>
 
-export const updateQuoteInputSchema = updateQuoteFormInputSchema
+export const updateQuoteInputSchema = z.object({
+  id: z.string(),
+  data: updateQuoteFormInputSchema,
+})
 
 export type UpdateQuoteInput = z.infer<typeof updateQuoteInputSchema>
 

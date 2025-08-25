@@ -1,5 +1,5 @@
 import { Breadcrumb } from "@/components/shared/breadcrumb"
-import { QuoteForm } from "@/forms/quote-form"
+import { CreateQuoteForm } from "@/forms/create-quote-form"
 
 export function NewQuotePage() {
   return (
@@ -15,7 +15,7 @@ export function NewQuotePage() {
         ]}
       />
       <div className="space-y-4">
-        <QuoteForm />
+        <CreateQuoteForm />
       </div>
     </>
   )

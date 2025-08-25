@@ -32,52 +32,24 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { MAPPED_QUOTE_TYPES } from "@/lib/constants"
-import { QuoteWithRecords } from "@/lib/db/schema"
-import { createQuote, updateQuote } from "@/lib/helpers/data.helpers"
+import { createQuote } from "@/lib/helpers/data.helpers"
 import {
   CreateQuoteFormInput,
   createQuoteFormInputSchema,
 } from "@/lib/schemas/quote.schema"
 import { cn } from "@/lib/utils"
 
-export function QuoteForm({ quote }: { quote?: QuoteWithRecords }) {
-  const isEditing = !!quote
+export function CreateQuoteForm() {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
 
-  const initialValues: CreateQuoteFormInput = {
-    id: quote?.id ?? "",
-    type: quote?.type ?? "1",
-    customer: quote?.customer ?? "",
-    phoneNumber: quote?.phoneNumber ?? "",
-    taxCode: quote?.taxCode ?? "",
-    address: quote?.address ?? "",
-    carModel: quote?.carModel ?? "",
-    carRegistrationNumber: quote?.carRegistrationNumber ?? "",
-    carOdometer: quote?.carOdometer ?? 0,
-    carVin: quote?.carVin ?? "",
-    date: quote?.date ?? new Date().toISOString(),
-  }
   const form = useForm<CreateQuoteFormInput>({
     resolver: zodResolver(createQuoteFormInputSchema),
-    values: initialValues,
   })
 
   async function onSubmit(values: CreateQuoteFormInput) {
     try {
       setLoading(true)
-
-      if (isEditing) {
-        await updateQuote({
-          id: quote.id,
-          data: values,
-        })
-        setLoading(false)
-        router.invalidate({ sync: true })
-        toast.success("Cập nhật phiếu báo giá thành công")
-        return
-      }
-
       await createQuote(values)
       setLoading(false)
       toast.success("Thêm phiếu báo giá thành công")
@@ -304,8 +276,6 @@ export function QuoteForm({ quote }: { quote?: QuoteWithRecords }) {
             <>
               <LoaderCircleIcon className="animate-spin" /> Đang xử lý
             </>
-          ) : quote ? (
-            "Cập nhật"
           ) : (
             "Tạo mới"
           )}

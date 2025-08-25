@@ -1,10 +1,12 @@
 import { useRef } from "react"
 
-import { Link, notFound, useLoaderData } from "@tanstack/react-router"
+import { notFound, useLoaderData } from "@tanstack/react-router"
 import { format } from "date-fns"
+import { PrinterIcon } from "lucide-react"
 import { useReactToPrint } from "react-to-print"
 
 import { RecordList } from "@/components/record-list"
+import { Breadcrumb } from "@/components/shared/breadcrumb"
 import { Button } from "@/components/ui/button"
 import { MAPPED_QUOTE_TYPES } from "@/lib/constants"
 import type { QuoteWithRecords } from "@/lib/db/schema"
@@ -24,15 +26,24 @@ export function PrintQuotePage() {
 
   return (
     <>
-      <div className="flex items-center gap-4">
-        <Button onClick={print}>In phiếu</Button>
-        <Link to="/quotes/$quoteId" params={{ quoteId: data.id }}>
-          <Button variant="destructive">Quay lại</Button>
-        </Link>
-      </div>
+      <Breadcrumb
+        breadcrumb={[
+          {
+            to: "/",
+            label: "Màn hình chính",
+          },
+          { to: "/quotes", label: "Phiếu sửa chữa" },
+          { to: `/quotes/${data.id}`, label: `#${data.id}` },
+          { to: `/quotes/${data.id}/print`, label: "In" },
+        ]}
+      />
+
+      <p className="text-destructive text-center">
+        Vui lòng kiểm tra phiếu báo giá lần cuối trước khi in phiếu
+      </p>
       <div
         ref={contentRef}
-        className="flex w-[960px] flex-col items-stretch p-6"
+        className="mx-auto flex w-[960px] flex-col items-stretch p-6"
       >
         <div className="flex items-center gap-12 self-center">
           <img src="/projectx/logo.svg" alt="Logo" className="w-[192px]" />
@@ -146,6 +157,9 @@ export function PrintQuotePage() {
           </div>
         </div>
       </div>
+      <Button onClick={print} className="w-full">
+        <PrinterIcon /> Xác nhận và In phiếu
+      </Button>
     </>
   )
 }

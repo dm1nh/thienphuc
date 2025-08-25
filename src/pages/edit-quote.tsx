@@ -3,8 +3,8 @@ import { useLoaderData } from "@tanstack/react-router"
 import { RecordList } from "@/components/record-list"
 import { Breadcrumb } from "@/components/shared/breadcrumb"
 import { Separator } from "@/components/ui/separator"
-import { QuoteForm } from "@/forms/quote-form"
-import { RecordForm } from "@/forms/record-form"
+import { CreateRecordForm } from "@/forms/create-record-form"
+import { EditQuoteForm } from "@/forms/edit-quote-form"
 import type { QuoteWithRecords } from "@/lib/db/schema"
 
 export function EditQuotePage() {
@@ -27,9 +27,9 @@ export function EditQuotePage() {
         ]}
       />
       <div className="space-y-4">
-        <QuoteForm quote={data} />
+        <EditQuoteForm quote={data} />
         <Separator />
-        <RecordForm quote={data} />
+        <CreateRecordForm quote={data} />
         <RecordList quote={data} allowEdit />
       </div>
     </>

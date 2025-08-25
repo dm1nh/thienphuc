@@ -22,7 +22,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { RecordForm } from "@/forms/record-form"
+import { EditRecordForm } from "@/forms/edit-record-form"
 import { MAPPED_RECORD_TYPES } from "@/lib/constants"
 import type { QuoteWithRecords } from "@/lib/db/schema"
 import { deleteRecord } from "@/lib/helpers/data.helpers"
@@ -120,7 +120,10 @@ export function RecordList({
                         </TableCell>
                         {allowEdit && (
                           <TableCell className="space-x-2 text-right">
-                            <RecordForm quote={quote} recordId={record.id} />
+                            <EditRecordForm
+                              quote={quote}
+                              recordId={record.id}
+                            />
                             <AlertDialog>
                               <AlertDialogTrigger asChild>
                                 <Button variant="destructive" size="icon">
