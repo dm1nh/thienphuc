@@ -4,15 +4,23 @@ import { migrate } from "drizzle-orm/better-sqlite3/migrator"
 
 import { db } from "."
 
-const migrationsFolder = path.resolve(
+const inDevelopment = process.env.NODE_ENV === "development"
+
+const resourcesPath = process.resourcesPath
+const migrationsFolder = inDevelopment ? path.resolve(
   __dirname,
   "..",
   "..",
-  "src/lib/db/migrations",
-)
+  "src/extraResources/db/migrations",
+) : path.join(resourcesPath, "db", "migrations")
 
-export function runMigrations() {
+export function applyMigrations() {
+  try {
   migrate(db, {
     migrationsFolder,
   })
+  console.log("Migration applied successfully")
+} catch(err) {
+  console.log("Migration failed: ", err)
+}
 }

@@ -121,6 +121,7 @@ const config: ForgeConfig = {
     },
   },
   packagerConfig: {
+    extraResource: ["./src/extraResources/db"],
     prune: true,
     asar: { unpackDir: '' },
     ignore: (file: any) => {

@@ -1,5 +1,6 @@
 CREATE TABLE `quotes` (
 	`id` text PRIMARY KEY NOT NULL,
+	`type` text DEFAULT '1' NOT NULL,
 	`customer` text NOT NULL,
 	`phone_number` text NOT NULL,
 	`address` text,
@@ -17,6 +18,7 @@ CREATE TABLE `records` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`quote_id` text NOT NULL,
 	`name` text NOT NULL,
+	`unit` text NOT NULL,
 	`unit_price` integer NOT NULL,
 	`quantity` real NOT NULL,
 	`vat` integer DEFAULT 8 NOT NULL,

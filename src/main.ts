@@ -4,7 +4,7 @@ import { app, BrowserWindow } from "electron"
 import started from "electron-squirrel-startup"
 
 import { registerListeners } from "./ipc/listeners-register"
-import { runMigrations } from "./lib/db/migrate"
+import { applyMigrations } from "./lib/db/migrate"
 import { seedDatabase } from "./lib/db/seed"
 
 const inDevelopment = process.env.NODE_ENV === "development"
@@ -16,11 +16,8 @@ if (started) {
 
 const createWindow = async () => {
   try {
-    if (inDevelopment) {
-      await seedDatabase()
-    }
-    runMigrations()
-    console.log("Migration applied successfully")
+    applyMigrations()
+    await seedDatabase()
   } catch (err) {
     console.log("Error applying migrations: ", err)
   }

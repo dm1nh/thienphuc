@@ -1,1 +1,0 @@
-ALTER TABLE `records` ADD `unit` text NOT NULL;
