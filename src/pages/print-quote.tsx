@@ -10,6 +10,7 @@ import { Breadcrumb } from "@/components/shared/breadcrumb"
 import { Button } from "@/components/ui/button"
 import { MAPPED_QUOTE_TYPES } from "@/lib/constants"
 import type { QuoteWithRecords } from "@/lib/db/schema"
+import logo from "../assets/images/logo.jpg"
 
 export function PrintQuotePage() {
   const data = useLoaderData({
@@ -46,7 +47,7 @@ export function PrintQuotePage() {
         className="mx-auto flex w-[960px] flex-col items-stretch p-6"
       >
         <div className="flex items-center justify-center gap-16">
-          <img src="/images/logo.jpg" alt="Logo" className="w-[192px]" />
+          <img src={logo} alt="Logo" className="w-[192px]" />
           <div>
             <p className="font-semibold uppercase">
               Gara ô tô Thiên Phúc Workshop

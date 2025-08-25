@@ -124,7 +124,7 @@ const config: ForgeConfig = {
     },
   },
   packagerConfig: {
-    icon: "./public/icons/icon",
+    icon: "./src/assets/icons/icon",
     extraResource: ["./resources/db"],
     prune: true,
     asar: { unpackDir: "" },
