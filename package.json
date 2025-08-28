@@ -1,8 +1,8 @@
 {
   "name": "thienphuc",
   "productName": "ThienPhucWorkshop",
-  "version": "0.0.1",
-  "description": "ThienPhucWorkshop management application",
+  "version": "0.0.2",
+  "description": "Ứng dụng xuất phiếu báo giá sửa chữa của Thiên Phúc Workshop",
   "main": ".vite/build/main.js",
   "scripts": {
     "start": "electron-forge start",
@@ -11,6 +11,7 @@
     "recompile": "electron-rebuild -f -w \"better-sqlite3\"",
     "publish": "electron-forge publish",
     "lint": "eslint --ext .ts,.tsx .",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,mts,mjs,cjs,json}\" --cache",
     "db:push": "drizzle-kit push",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",

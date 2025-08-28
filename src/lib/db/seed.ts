@@ -5,7 +5,7 @@ export async function seedDatabase() {
   if (process.env.NODE_ENV !== "development") {
     return
   }
-  
+
   console.info("DELETING OLD SEED DATABASE")
   await db.delete(quotes)
   await db.delete(records)

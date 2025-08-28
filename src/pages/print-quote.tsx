@@ -10,6 +10,7 @@ import { Breadcrumb } from "@/components/shared/breadcrumb"
 import { Button } from "@/components/ui/button"
 import { MAPPED_QUOTE_TYPES } from "@/lib/constants"
 import type { QuoteWithRecords } from "@/lib/db/schema"
+
 import logo from "../assets/images/logo.jpg"
 
 export function PrintQuotePage() {
@@ -53,8 +54,7 @@ export function PrintQuotePage() {
               Gara ô tô Thiên Phúc Workshop
             </p>
             <p>
-              Địa chỉ: 72 Trần Đại Nghĩa, Phường Tân Tạo A, quận Bình Tân, TP.
-              Hồ Chí Minh
+              Địa chỉ: 72 Trần Đại Nghĩa, Phường Tân Tạo, thành phố Hồ Chí Minh
             </p>
             <p>Tel: 093.82.84.079 hoặc 096.444.62.64</p>
             <p>Website: thienphucworkshop.com.vn</p>
