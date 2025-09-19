@@ -45,21 +45,21 @@ export function PrintQuotePage() {
       </p>
       <div
         ref={contentRef}
-        className="mx-auto flex w-[960px] flex-col items-stretch p-6"
+        className="mx-auto flex w-[960px] flex-col items-stretch py-6 px-16"
       >
         <div className="flex items-center justify-center gap-16">
           <img src={logo} alt="Logo" className="w-[192px]" />
           <div>
             <p className="font-semibold uppercase">
-              Gara ô tô Thiên Phúc Workshop
+              Công ty TNHH Thiên Phúc Workshop
             </p>
             <p>
-              Địa chỉ: 72 Trần Đại Nghĩa, Phường Tân Tạo, thành phố Hồ Chí Minh
+              Địa chỉ: 72 Trần Đại Nghĩa, Phường Tân Tạo, TP. Hồ Chí Minh
             </p>
             <p>Tel: 093.82.84.079 hoặc 096.444.62.64</p>
             <p>Website: thienphucworkshop.com.vn</p>
             <p>Email: thienphucworkshop@gmail.com</p>
-            <p>Số TK: 060333030813 - SACOMBANK - CN Hồ Chí Minh</p>
+            <p>Số TK: 1060512558 - VIETCOMBANK - CN Sài Gòn Chợ Lớn - PGD Bình Tây</p>
           </div>
         </div>
         <h1 className="mt-8 text-center text-2xl font-semibold uppercase">

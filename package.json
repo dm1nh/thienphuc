@@ -1,7 +1,7 @@
 {
   "name": "thienphuc",
   "productName": "ThienPhucWorkshop",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Ứng dụng xuất phiếu báo giá sửa chữa của Thiên Phúc Workshop",
   "main": ".vite/build/main.js",
   "scripts": {
