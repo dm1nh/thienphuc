@@ -20,7 +20,7 @@ export function PrintQuotePage() {
   console.log(data)
 
   const contentRef = useRef<HTMLDivElement>(null)
-  const print = useReactToPrint({ contentRef })
+  const print = useReactToPrint({ contentRef, pageStyle: "@page { margin: 40px 10px 120px 10px !important; }" })
 
   if (!data) {
     return notFound()
@@ -45,7 +45,7 @@ export function PrintQuotePage() {
       </p>
       <div
         ref={contentRef}
-        className="mx-auto flex w-[960px] flex-col items-stretch py-6 px-16"
+        className="mx-auto flex w-[960px] flex-col items-stretch px-16"
       >
         <div className="flex items-center justify-center gap-16">
           <img src={logo} alt="Logo" className="w-[192px]" />
