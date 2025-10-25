@@ -1,4 +1,4 @@
-import { useRef } from "react"
+import { useRef, useState } from "react"
 
 import { notFound, useLoaderData } from "@tanstack/react-router"
 import { format } from "date-fns"
@@ -8,8 +8,11 @@ import { useReactToPrint } from "react-to-print"
 import { RecordList } from "@/components/record-list"
 import { Breadcrumb } from "@/components/shared/breadcrumb"
 import { Button } from "@/components/ui/button"
+import { PrintSettingsForm } from "@/forms/print-settings-form"
 import { MAPPED_QUOTE_TYPES } from "@/lib/constants"
 import type { QuoteWithRecords } from "@/lib/db/schema"
+import type { PrintSettingsFormInput } from "@/lib/schemas/quote.schema"
+import { cmToPx } from "@/lib/utils"
 
 import logo from "../assets/images/logo.jpg"
 
@@ -17,10 +20,18 @@ export function PrintQuotePage() {
   const data = useLoaderData({
     from: "/quotes/$quoteId/print",
   }) as QuoteWithRecords
-  console.log(data)
+  const [settings, setSettings] = useState<PrintSettingsFormInput>({
+    marginLeft: 1.5,
+    marginRight: 1.5,
+    marginTop: 2.5,
+    marginBottom: 2.5,
+  })
 
   const contentRef = useRef<HTMLDivElement>(null)
-  const print = useReactToPrint({ contentRef, pageStyle: "@page { margin: 40px 10px 120px 10px !important; }" })
+  const print = useReactToPrint({
+    contentRef,
+    pageStyle: `@page { margin: ${cmToPx(settings.marginTop)}px ${cmToPx(settings.marginRight)}px ${cmToPx(settings.marginBottom)}px ${cmToPx(settings.marginLeft)}px !important; }`,
+  })
 
   if (!data) {
     return notFound()
@@ -53,13 +64,14 @@ export function PrintQuotePage() {
             <p className="font-semibold uppercase">
               Công ty TNHH Thiên Phúc Workshop
             </p>
-            <p>
-              Địa chỉ: 72 Trần Đại Nghĩa, Phường Tân Tạo, TP. Hồ Chí Minh
-            </p>
+            <p>Địa chỉ: 72 Trần Đại Nghĩa, Phường Tân Tạo, TP. Hồ Chí Minh</p>
             <p>Tel: 093.82.84.079 hoặc 096.444.62.64</p>
             <p>Website: thienphucworkshop.com.vn</p>
             <p>Email: thienphucworkshop@gmail.com</p>
-            <p>Số TK: 1060512558 - VIETCOMBANK - CN Sài Gòn Chợ Lớn - PGD Bình Tây</p>
+            <p>
+              Số TK: 1060512558 - VIETCOMBANK - CN Sài Gòn Chợ Lớn - PGD Bình
+              Tây
+            </p>
           </div>
         </div>
         <h1 className="mt-8 text-center text-2xl font-semibold uppercase">
@@ -158,9 +170,12 @@ export function PrintQuotePage() {
           </div>
         </div>
       </div>
-      <Button onClick={print} className="w-full">
-        <PrinterIcon /> Xác nhận và In phiếu
-      </Button>
+      <div className="grid grid-cols-2 gap-6">
+        <PrintSettingsForm setSettings={setSettings} />
+        <Button onClick={print}>
+          <PrinterIcon /> In phiếu
+        </Button>
+      </div>
     </>
   )
 }

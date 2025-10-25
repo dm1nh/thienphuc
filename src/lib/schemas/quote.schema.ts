@@ -51,3 +51,13 @@ export type GetQuoteByIdInput = z.infer<typeof getQuoteByIdInputSchema>
 export const deleteQuoteInputSchema = z.string()
 
 export type DeleteQuoteInput = z.infer<typeof deleteQuoteInputSchema>
+
+export const printSettingsFormInputSchema = z.object({
+  marginLeft: z.coerce.number<number>(),
+  marginRight: z.coerce.number<number>(),
+  marginTop: z.coerce.number<number>(),
+  marginBottom: z.coerce.number<number>(),
+})
+export type PrintSettingsFormInput = z.infer<
+  typeof printSettingsFormInputSchema
+>

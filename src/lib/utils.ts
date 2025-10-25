@@ -18,6 +18,10 @@ type RecordGroup = {
   }
 }
 
+export function cmToPx(input: number, dpi = 96) {
+  return Math.floor(input * (dpi / 2.54))
+}
+
 export function calculateQuote(quoteWithRecords: QuoteWithRecords): Omit<
   QuoteWithRecords,
   "records"
