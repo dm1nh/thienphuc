@@ -170,7 +170,7 @@ export function PrintQuotePage() {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid grid-cols-2 gap-4">
         <PrintSettingsForm setSettings={setSettings} />
         <Button onClick={print}>
           <PrinterIcon /> In phiếu

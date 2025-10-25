@@ -19,6 +19,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
+import { Label } from "@/components/ui/label"
 import { NumberInput } from "@/components/ui/number-input"
 import {
   printSettingsFormInputSchema,
@@ -60,78 +61,83 @@ export function PrintSettingsForm({
         </DialogDescription>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-2">
-            <FormField
-              control={form.control}
-              name="marginLeft"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Left</FormLabel>
-                  <FormControl>
-                    <NumberInput
-                      min={0}
-                      decimalScale={1}
-                      fixedDecimalScale
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="marginRight"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Right</FormLabel>
-                  <FormControl>
-                    <NumberInput
-                      min={0}
-                      decimalScale={1}
-                      fixedDecimalScale
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="marginTop"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Top</FormLabel>
-                  <FormControl>
-                    <NumberInput
-                      min={0}
-                      decimalScale={1}
-                      fixedDecimalScale
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="marginBottom"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Bottom</FormLabel>
-                  <FormControl>
-                    <NumberInput
-                      min={0}
-                      decimalScale={1}
-                      fixedDecimalScale
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="grid gap-2">
+              <Label>Khoảng cách lề</Label>
+              <div className="grid grid-cols-2 gap-2">
+                <FormField
+                  control={form.control}
+                  name="marginLeft"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="font-normal">Trái (cm)</FormLabel>
+                      <FormControl>
+                        <NumberInput
+                          min={0}
+                          decimalScale={1}
+                          fixedDecimalScale
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="marginRight"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="font-normal">Phải (cm)</FormLabel>
+                      <FormControl>
+                        <NumberInput
+                          min={0}
+                          decimalScale={1}
+                          fixedDecimalScale
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="marginTop"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="font-normal">Trên (cm)</FormLabel>
+                      <FormControl>
+                        <NumberInput
+                          min={0}
+                          decimalScale={1}
+                          fixedDecimalScale
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="marginBottom"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="font-normal">Dưới (cm)</FormLabel>
+                      <FormControl>
+                        <NumberInput
+                          min={0}
+                          decimalScale={1}
+                          fixedDecimalScale
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
             <DialogClose asChild>
               <Button>Lưu</Button>
             </DialogClose>
